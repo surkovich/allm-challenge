@@ -6,7 +6,7 @@ Remarks:
 - Overall projects structure is split to follow hexagonal architecture and dependency inversion:
     - There are no any dependency on implementation between logical layers, which looses coupling of layers
     - net.allm.challenge.controller.api package should be moved to a separate artifact 
-  and shared with other teams (frontend, teams which have integrations with us, partners)
+  and shared with other teams (frontend, teams which have integrations with us, partners, etc.)
     - Internal structure can be also split to separate modules - 
       - net.allm.challenge.service.api - core/domain module. All  others can have a dependency on it
       - net.allm.challenge.service.impl - service implementation
@@ -15,8 +15,8 @@ Remarks:
       - net.allm.challenge.controller.impl - implementation of controllers, depends on its api and core
     Having above described structure means that no dependency on implementation module accepted, except for root assembling module
 - Division between service and repository layer is a bit controversial and a matter of discussion. Though generally I
-tried to write service layer, so it look independent of particular database storage/framework choice etc.
-- Service layer looks too simple in this case. Generally I left space for, i.e., integrations with hospitals etc.
+tried to write service layer independent of particular database storage/framework choice etc.
+- Service layer looks too simple in this case. Generally I left space for, i.e., integrations with hospitals, etc.
 - Also, currently there is no specific errors processing. If it is error in logic (i.e., exceeded limit of 
 upcoming visits for patient) - it should be located in the service-impl layer
 - I have added dateTime field to appointment database, though in real life there should be time slots, 
@@ -27,3 +27,9 @@ This is done on purpose, security-related tables should be moved to a separate s
 
 - Still more tests can be added, but I covered the main workflow. Check VisitControllerIntegrationTest.
 - Instead of deleting visits we can just mark them as deleted. Can be useful just in case... Or maybe just adding audit collection is enough
+
+- Repositories are split to crud repositories and "logical" ones. It also can be discussed. But this approach 
+helps hide any mentioning of JPA from service, and also looks not too bad in terms of testing. Of course, this 
+is not the only possible way. Could use JPQL/criteriaAPI/combine CRUD and logical operations in the same 
+classes. Any of these ways would have its tradeoffs and profits.  
+
