@@ -54,11 +54,8 @@ internal class VisitControllerIntegrationTest {
     @WithMockUser(value = "leif")
     @Test
     fun `create, check that created, delete, check that visit doesn't exist after delete`() {
-        val dateTime = LocalDateTime.of(2023, 7, 12, 12, 0,0,0)
-                .format(
-                DateTimeFormatter.ISO_DATE_TIME
-        )
-        println(dateTime)
+        val dateTime = "2023-07-12T12:00:00"
+
         val requestBody = """
 {
     "dateTime": "$dateTime",
@@ -106,7 +103,6 @@ internal class VisitControllerIntegrationTest {
         mvc = MockMvcBuilders
                 .webAppContextSetup(context)
                 .apply<DefaultMockMvcBuilder>(springSecurity())
-
                 .build()
     }
 
