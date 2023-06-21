@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.security.test.context.support.WithMockUser
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
@@ -86,15 +87,83 @@ internal class VisitControllerIntegrationTest {
 
         allMyVisits.toSet() shouldContain createdVisit
 
-        mvc!!.delete("/api/v1/visits/${createdVisit.id}")
+        mvc!!.delete("/api/v1/visits/${createdVisit.id}").andExpect { status { isOk() } }
 
         val allVisitsAfterDelete: List<VisitDto> = mapper.readValue<List<VisitDto>>(
-                mvc!!.get("/api/v1/visits") {}.andReturn().response.contentAsString
+                mvc!!.get("/api/v1/visits").andExpect { status { isOk() } }.andReturn().response.contentAsString
         )
 
         allVisitsAfterDelete shouldNotContain createdVisit
     }
 
+    @WithMockUser(value = "leif")
+    @Test
+    fun `attempt to delete another user's visit should not affect database`() {
+        val dateTime = "2023-07-12T12:00:00"
+
+        val requestBody = """
+{
+    "dateTime": "$dateTime",
+    "hospitalId": 1
+}
+            """.trimIndent()
+        val expectedVisit = """
+{
+    "hospitalName": "Flowerhill General Hospital",
+    "dateTime": "$dateTime"
+}
+        """.trimIndent()
+
+        val createVisitResponse = mvc!!.post("/api/v1/visits") {
+            contentType = MediaType.APPLICATION_JSON
+            content = requestBody
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isOk() }
+            content { contentType(MediaType.APPLICATION_JSON) }
+            content { json(expectedVisit) }
+        }.andReturn().response.contentAsString
+
+        val createdVisit = mapper
+                .readValue(createVisitResponse, VisitDto::class.java)
+
+        val allMyVisits: List<VisitDto> = mapper.readValue<List<VisitDto>>(
+                mvc!!.get("/api/v1/visits") {}.andReturn().response.contentAsString
+        )
+
+        allMyVisits.toSet() shouldContain createdVisit
+
+        mvc!!.delete("/api/v1/visits/${createdVisit.id}"){
+            with(user("leif1"))
+        }.andExpect {
+            status { isOk() }
+        }
+
+        val allVisitsAfterDelete: List<VisitDto> = mapper.readValue<List<VisitDto>>(
+                mvc!!.get("/api/v1/visits").andExpect { status { isOk() } }.andReturn().response.contentAsString
+        )
+
+        allVisitsAfterDelete shouldContain createdVisit
+    }
+
+    @Test
+    fun `attempt to make reservation without logging in should return 401`() {
+        val dateTime = "2023-07-12T12:00:00"
+
+        val requestBody = """
+{
+    "dateTime": "$dateTime",
+    "hospitalId": 1
+}
+            """.trimIndent()
+        mvc!!.post("/api/v1/visits") {
+            contentType = MediaType.APPLICATION_JSON
+            content = requestBody
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isUnauthorized() }
+        }
+    }
 
     @BeforeEach
     fun setup() {

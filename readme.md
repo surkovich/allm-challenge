@@ -33,3 +33,7 @@ helps hide any mentioning of JPA from service, and also looks not too bad in ter
 is not the only possible way. Could use JPQL/criteriaAPI/combine CRUD and logical operations in the same 
 classes. Any of these ways would have its tradeoffs and profits.  
 
+- In current implementation attempt to delete another users visit returns 200, but visit doesn't get deleted.
+This is the matter of discussion, maybe 401/403/404 would be better. Not defined in a specification, so left simple.
+
+
