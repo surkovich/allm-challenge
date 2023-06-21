@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:challenge
+    username: sa
+    password: sa
+    driverClassName: org.h2.Driver
+    schema: classpath:/schema.sql
+    data: classpath:/data.sql
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+    show-sql: true
+  h2:
+    console:
+      enabled: true
