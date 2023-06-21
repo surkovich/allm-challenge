@@ -3,11 +3,6 @@ package net.allm.challenge.controller
 import io.kotest.matchers.shouldBe
 import io.mockk.*
 import net.allm.challenge.controller.impl.*
-import net.allm.challenge.controller.impl.DEFAULT_PAGE
-import net.allm.challenge.controller.impl.DEFAULT_PAGE_SIZE
-import net.allm.challenge.controller.impl.DEFAULT_PAGE_SIZE_LIMIT
-import net.allm.challenge.controller.impl.EMPTY_NAME_PART
-import net.allm.challenge.controller.impl.HospitalController
 import net.allm.challenge.service.api.HospitalService
 import org.junit.jupiter.api.Test
 

@@ -8,11 +8,10 @@ import org.springframework.stereotype.Repository
 @Repository
 internal class PatientRepositoryImpl @Autowired constructor(
         private val crudRepository: PatientsCrudRepository
-): PatientRepository {
+) : PatientRepository {
 
     override fun findByUsername(username: String): Patient? =
             crudRepository.findDistinctByUsername(username)?.toDomain()
-
 
 
 }

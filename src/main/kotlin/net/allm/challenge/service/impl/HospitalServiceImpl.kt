@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-internal class HospitalServiceImpl @Autowired constructor(private val repository: HospitalRepository): HospitalService {
+internal class HospitalServiceImpl @Autowired constructor(private val repository: HospitalRepository) : HospitalService {
 
     override fun find(namePart: String, page: Int, size: Int): List<Hospital> =
             repository.find(namePart, page, size)

@@ -11,8 +11,10 @@ internal class SecurityUserEntity {
     @Id
     @Column(name = "username")
     lateinit var username: String
+
     @Column(name = "password")
     lateinit var password: String
+
     @Column(name = "enabled")
     var enabled: Boolean? = false
 }

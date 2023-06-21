@@ -7,11 +7,11 @@ import org.springframework.stereotype.Repository
 
 
 @Repository
-internal class HospitalRepositoryImpl(private val jpaRepository: HospitalJpaRepository): HospitalRepository {
+internal class HospitalRepositoryImpl(private val jpaRepository: HospitalJpaRepository) : HospitalRepository {
 
     override fun find(namePart: String, page: Int, size: Int): List<Hospital> =
-        jpaRepository.findByNameIsContainingIgnoreCase(namePart, PageRequest.of(page, size))
-                .toDomains()
+            jpaRepository.findByNameIsContainingIgnoreCase(namePart, PageRequest.of(page, size))
+                    .toDomains()
 
 
 }

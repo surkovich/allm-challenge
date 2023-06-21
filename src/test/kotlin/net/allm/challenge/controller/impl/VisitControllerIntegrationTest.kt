@@ -81,7 +81,7 @@ internal class VisitControllerIntegrationTest {
                 .readValue(createVisitResponse, VisitDto::class.java)
 
         val allMyVisits: List<VisitDto> = mapper.readValue<List<VisitDto>>(
-                mvc!!.get("/api/v1/visits"){}.andReturn().response.contentAsString
+                mvc!!.get("/api/v1/visits") {}.andReturn().response.contentAsString
         )
 
         allMyVisits.toSet() shouldContain createdVisit
@@ -89,7 +89,7 @@ internal class VisitControllerIntegrationTest {
         mvc!!.delete("/api/v1/visits/${createdVisit.id}")
 
         val allVisitsAfterDelete: List<VisitDto> = mapper.readValue<List<VisitDto>>(
-                mvc!!.get("/api/v1/visits"){}.andReturn().response.contentAsString
+                mvc!!.get("/api/v1/visits") {}.andReturn().response.contentAsString
         )
 
         allVisitsAfterDelete shouldNotContain createdVisit

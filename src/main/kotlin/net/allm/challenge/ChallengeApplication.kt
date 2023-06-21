@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class ChallengeApplication
 
 fun main(args: Array<String>) {
-	runApplication<ChallengeApplication>(*args)
+    runApplication<ChallengeApplication>(*args)
 }

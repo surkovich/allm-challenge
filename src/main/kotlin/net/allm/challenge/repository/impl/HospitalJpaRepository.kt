@@ -5,6 +5,6 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.PagingAndSortingRepository
 
 
-internal interface HospitalJpaRepository : PagingAndSortingRepository<HospitalEntity, Long>{
+internal interface HospitalJpaRepository : PagingAndSortingRepository<HospitalEntity, Long> {
     fun findByNameIsContainingIgnoreCase(namePart: String, pageable: Pageable): List<HospitalEntity>
 }

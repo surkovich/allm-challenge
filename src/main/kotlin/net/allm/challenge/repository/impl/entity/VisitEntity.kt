@@ -11,12 +11,15 @@ internal class VisitEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     var id: Long? = null
+
     @ManyToOne
-    @JoinColumn(name="hospital_id", nullable=false)
+    @JoinColumn(name = "hospital_id", nullable = false)
     lateinit var hospital: HospitalEntity
+
     @ManyToOne
-    @JoinColumn(name="patient_id", nullable=false)
+    @JoinColumn(name = "patient_id", nullable = false)
     lateinit var patient: PatientEntity
+
     @Column(name = "datetime", columnDefinition = "TIMESTAMP")
     lateinit var dateTime: LocalDateTime
 

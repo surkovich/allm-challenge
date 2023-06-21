@@ -11,8 +11,10 @@ internal class PatientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     var id: Long? = null
+
     @Column(name = "name", nullable = false)
     lateinit var name: String
+
     @Column(name = "username", nullable = false)
     lateinit var username: String
 

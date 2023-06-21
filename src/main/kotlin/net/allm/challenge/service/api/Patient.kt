@@ -1,6 +1,6 @@
 package net.allm.challenge.service.api
 
-data class Patient (
+data class Patient(
         val id: Long,
         val name: String,
         val username: String

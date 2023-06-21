@@ -9,7 +9,6 @@ import net.allm.challenge.repository.api.VisitRepository
 import net.allm.challenge.service.api.Hospital
 import net.allm.challenge.service.api.Patient
 import net.allm.challenge.service.api.Visit
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 

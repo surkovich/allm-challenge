@@ -12,14 +12,14 @@ import java.time.LocalDateTime
 class VisitServiceImpl @Autowired constructor(
         private val repository: VisitRepository,
         private val patientRepository: PatientRepository
-): VisitService {
+) : VisitService {
 
     //TODO find only upcoming visits?..
     override fun findUsersVisits(userName: String): List<Visit> =
-        repository.findByUserName(userName)
+            repository.findByUserName(userName)
 
     override fun createNewVisit(userName: String, hospitalId: Long, dateTime: LocalDateTime) =
-            //TODO - in case of production we probably should also limit upcoming visits amount for each patient
+    //TODO - in case of production we probably should also limit upcoming visits amount for each patient
             //This functionality will be for service layer
             repository.createNewVisit(
                     username = userName,

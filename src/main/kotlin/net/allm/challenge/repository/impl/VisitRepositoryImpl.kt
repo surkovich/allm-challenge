@@ -26,7 +26,6 @@ internal class VisitRepositoryImpl @Autowired constructor(
             crud.findAllByPatient(patient).toVisitDomains()
     }
 
-
     override fun createNewVisit(username: String, hospitalId: Long, dateTime: LocalDateTime): Visit {
         val hospital = em.getReference(HospitalEntity::class.java, hospitalId)
         val patient = patientsCrudRepository.findDistinctByUsername(username)
@@ -40,9 +39,9 @@ internal class VisitRepositoryImpl @Autowired constructor(
 
     @OptIn(ExperimentalStdlibApi::class)
     override fun findById(id: Long): Visit? =
-        crud.findById(id).getOrNull()?.toDomain()
+            crud.findById(id).getOrNull()?.toDomain()
 
     override fun deleteById(id: Long) =
-        crud.deleteById(id)
+            crud.deleteById(id)
 
 }

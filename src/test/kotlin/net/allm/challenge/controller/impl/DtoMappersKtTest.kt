@@ -3,7 +3,6 @@ package net.allm.challenge.controller.impl
 import io.kotest.matchers.shouldBe
 import net.allm.challenge.controller.api.HospitalResponseDto
 import net.allm.challenge.service.api.Hospital
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class DtoMappersKtTest {

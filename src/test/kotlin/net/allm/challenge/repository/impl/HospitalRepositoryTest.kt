@@ -18,7 +18,7 @@ internal class HospitalRepositoryTest {
         val namePart = "some name part"
 
         val returnedEntities = listOf(
-            HospitalEntity().apply { id = 1; name = namePart }
+                HospitalEntity().apply { id = 1; name = namePart }
         )
 
         every {
@@ -26,7 +26,7 @@ internal class HospitalRepositoryTest {
                     namePart = "some name part",
                     pageable = Pageable.unpaged()
             )
-        } answers  {
+        } answers {
             returnedEntities
         }
 
@@ -34,9 +34,11 @@ internal class HospitalRepositoryTest {
 
         found shouldBe returnedEntities.toDomains()
 
-        verify { jpaRepository.findByNameIsContainingIgnoreCase(
-                namePart, Pageable.unpaged()
-        ) }
+        verify {
+            jpaRepository.findByNameIsContainingIgnoreCase(
+                    namePart, Pageable.unpaged()
+            )
+        }
 
         confirmVerified(jpaRepository)
     }
@@ -60,7 +62,7 @@ internal class HospitalRepositoryTest {
                     namePart = "some name part",
                     pageable = capture(capturedPageable)
             )
-        } answers  {
+        } answers {
             returnedEntities
         }
 
@@ -72,8 +74,10 @@ internal class HospitalRepositoryTest {
         capturedPageable.captured.pageNumber shouldBe page
         capturedPageable.captured.pageSize shouldBe size
 
-        verify { jpaRepository.findByNameIsContainingIgnoreCase(
-                namePart, expectedPageable) }
+        verify {
+            jpaRepository.findByNameIsContainingIgnoreCase(
+                    namePart, expectedPageable)
+        }
 
         confirmVerified(jpaRepository)
 

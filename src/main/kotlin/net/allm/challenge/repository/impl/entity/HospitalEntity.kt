@@ -6,9 +6,9 @@ import jakarta.persistence.*
 @Entity
 @Table(name = "HOSPITALS")
 internal class HospitalEntity {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "id", nullable = false)
-        var id: Long? = null
-        lateinit var name: String
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    var id: Long? = null
+    lateinit var name: String
 }

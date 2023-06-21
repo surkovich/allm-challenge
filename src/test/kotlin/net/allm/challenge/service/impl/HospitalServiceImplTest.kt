@@ -9,7 +9,7 @@ import net.allm.challenge.repository.api.HospitalRepository
 import net.allm.challenge.service.api.Hospital
 import org.junit.jupiter.api.Test
 
-class HospitalServiceImplTest{
+class HospitalServiceImplTest {
 
     private val repository = mockk<HospitalRepository>()
 

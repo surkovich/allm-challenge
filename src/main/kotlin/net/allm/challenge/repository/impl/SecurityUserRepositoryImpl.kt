@@ -15,7 +15,7 @@ internal class SecurityUserRepositoryImpl @Autowired constructor(
         val entity = crud.findById(username)
         if (entity.isEmpty)
             return null
-        if (entity.get().enabled != true )
+        if (entity.get().enabled != true)
             return null
 
         return entity.get().toUser()

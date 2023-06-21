@@ -36,5 +36,4 @@ internal class HospitalJpaRepositoryTest @Autowired constructor(
     }
 
 
-
 }
