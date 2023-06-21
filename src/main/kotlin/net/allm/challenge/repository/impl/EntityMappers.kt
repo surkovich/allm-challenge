@@ -11,7 +11,8 @@ import net.allm.challenge.service.api.Visit
 /**
  * Currently added only manual mappers. Maybe in production code we can use some nice
  * automated objects mapper - like MapStruct in java, or whatever. On the other hand -
- * usage of manually written mappers in Kotlin is not so bad since it is very transparent.
+ * usage of manually written mappers in Kotlin is not so bad since it is very transparent
+ * thanks to named parameters placeholders
  *
  * In other words, this is the small topic for discussion inside a team in case of real project
  */
